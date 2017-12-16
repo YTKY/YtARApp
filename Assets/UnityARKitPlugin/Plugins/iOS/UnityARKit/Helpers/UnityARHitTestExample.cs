@@ -8,6 +8,10 @@ namespace UnityEngine.XR.iOS
 	{
 		public Transform m_HitTransform;
         public Text text;
+
+		public GameObject bullet;
+		public Transform muzzle;
+		public float speed;
         
         bool HitTestWithResultType (ARPoint point, ARHitTestResultType resultTypes)
         {
@@ -28,25 +32,36 @@ namespace UnityEngine.XR.iOS
 		
 		// Update is called once per frame
 		void Update () {
-			// if (Input.touchCount > 0 && m_HitTransform != null)
-			// {
-			// 	var touch = Input.GetTouch(0);
-			// 	if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
-			// 	{
-			// 		var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
-			// 		ARPoint point = new ARPoint {
-			// 			x = screenPosition.x,
-			// 			y = screenPosition.y
-			// 		};
-            //         if (HitTestWithResultType (point, ARHitTestResultType.ARHitTestResultTypeExistingPlane))
-            //         {
-            //             return;
-            //         }
-			// 	}
-			// }
+				// 玉を発射
+				if (Application.isEditor)
+				{
+						if (Input.GetMouseButtonUp(0))
+						{
+					Shot ();
+				}
+				}
+				else
+				{
+					if (Input.touchCount > 0)
+					{
+						Touch touch = Input.GetTouch(0);
+						if (touch.phase == TouchPhase.Ended)
+						{
+						Shot ();
+						}	
+					}
+				}   
 		}
 
-	
+
+		void Shot() {        
+			GameObject bulletInstance = GameObject.Instantiate(bullet, muzzle.position, muzzle.rotation);
+			Vector3 force;
+			force = bulletInstance.transform.forward * speed;        
+			bulletInstance.GetComponent<Rigidbody> ().AddForce (force);
+			Destroy(bulletInstance, 5);
+		}
+
 	}
 }
 

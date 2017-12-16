@@ -57,7 +57,8 @@ namespace UnityEngine.XR.iOS
                 // Create Enemy
                 GameObject enemyInstance = GameObject.Instantiate(enemyPrefab);
                 Vector3 enemyPosition = Camera.main.transform.position;
-                enemyPosition += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+				float multiply = (float)(30.0 / (Math.Pow (Math.Pow ((Camera.main.transform.forward.x - enemyPosition.x), 2) + Math.Pow ((Camera.main.transform.forward.z - enemyPosition.z), 2), 0.5)));
+				enemyPosition += new Vector3((Camera.main.transform.forward.x * multiply), 0, (Camera.main.transform.forward.z * multiply));
                 enemyInstance.transform.position = enemyPosition;
                 Debug.Log (string.Format ("x:{0:0.######} y:{1:0.######} z:{2:0.######}", Camera.main.transform.position.x, Camera.main.transform.position.y,Camera.main.transform.position.z));
                 Debug.Log (string.Format ("x:{0:0.######} y:{1:0.######} z:{2:0.######}", enemyPosition.x, enemyPosition.y, enemyPosition.z));                
