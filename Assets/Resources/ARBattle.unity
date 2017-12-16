@@ -761,7 +761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HitTransform: {fileID: 1286139108}
   text: {fileID: 714738149}
-  bullet: {fileID: 1782694284099814, guid: 4984515803dc8415fa06bfb78fd66b71, type: 2}
+  bullet: {fileID: 1024507081045054, guid: 6c2ae6699128f4686a35b532f7d04d61, type: 2}
   muzzle: {fileID: 9}
   speed: 1000
 --- !u!1 &1121666029
